@@ -13,7 +13,7 @@ int main() {
         int highTemp = 0;
         int jTemp = -1;
         for(int j = 0; j < N; j++) {
-            if(sortedA[j] != -1) { continue;}
+            if(sortedA[j] != -1) { continue; }
             int newTemp = A[i] * B[j] + B[j];
             if(highTemp < newTemp) {highTemp = newTemp; jTemp = j;}
         }
@@ -21,5 +21,7 @@ int main() {
     }
     for(int i = 0; i < N; i++) { S += sortedA[i] * B[i];}
     cout << S;
+
+    
     return 0;
 }
