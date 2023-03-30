@@ -24,11 +24,11 @@ int main() {
                 char ch = num[i][j];
                 if((ch == num[i+k-1][j]) && (ch == num[i][j+k-1]) && (ch == num[i+k-1][j+k-1])) {
                     max = k;
-                    goto exit; // break하기 까다로워서 goto
+                    goto exit; // break하기 까다로워서 goto. 다중 포문에서 goto 안쓰고 깔끔하게 멈출려면 함수로 빼서 return 해야할듯.
                 }
             }
         }
-        if(k == 2) { // k가 2가 될 때까지 정사각형을 못 찾은 경우
+        if(k == 2) { // k가 2가 될 때까지 정사각형을 못 찾은 경우. 나중에 생각해보니 1까지 돌리면 알아서 if 문 들어갈테니 상관 없었을 듯?
             cout << 1; 
             return 0;
         }
