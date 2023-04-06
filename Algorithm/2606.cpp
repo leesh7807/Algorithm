@@ -28,7 +28,7 @@ int main() {
     infestedCom[1] = 1; // 최초 감염된 1번 컴퓨터
     queue<int> bfsQ;
     bfsQ.push(1);
-    while(true) {
+    while(!bfsQ.empty()) {
         vector<pair<int, int>>::iterator iter = lower_bound(net.begin(), net.end(), bfsQ.front(), departCompare); // net 벡터를 앞에서 부터 탐색, bfsQ.first 이상인 최초의 iterator 반환. 
         while(iter->first == bfsQ.front()) {
             if(!infestedCom[iter->second]) {
@@ -39,7 +39,6 @@ int main() {
             iter++;
         }
         bfsQ.pop();
-        if(bfsQ.empty()) break;
     }
     cout << ans << endl;
     return 0;
