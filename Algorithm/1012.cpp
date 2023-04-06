@@ -16,6 +16,7 @@ int main() {
         int isChecked[n][m]; // BFS 방문 기록
         for(int i=0; i<n; i++) { 
             for(int j=0; j<m; j++) {
+                field[i][j] = 0;
                 isChecked[i][j] = 0;
             }
         }
@@ -27,14 +28,14 @@ int main() {
         int cabbageGroup = 0;
         for(int i=0; i<n; i++) {
             for(int j=0; j<m; j++) {
-                if(field[i][j] == 1 && isChecked[i][j] == 0) { // 배추 있는데 BFS탐색 안한 곳.
+                if(field[i][j] && !isChecked[i][j]) { // 배추 있는데 BFS탐색 안한 곳.
                     cabbageGroup++;
                     queue<pair<int, int>> q;
                     q.push(make_pair(i, j)); 
-                    while(q.size() > 0) {
+                    while(!q.empty()) {
                         int x = q.front().first;
                         int y = q.front().second;
-                        if(x + 1 < n && field[x+1][j] && !isChecked[x+1][y]) {
+                        if(x + 1 < n && field[x+1][y] && !isChecked[x+1][y]) {
                             isChecked[x+1][y] = 1;
                             q.push(make_pair(x+1, y));
                         }
@@ -57,4 +58,5 @@ int main() {
         }
         cout << cabbageGroup << endl;
     }
+    return 0;
 }
