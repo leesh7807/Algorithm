@@ -1,61 +1,47 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <stack>
 #define endl '\n'
 using namespace std;
+
+int w, h; // 1 ~ 50
+bool arr[50][50];
+bool isVisited[50][50];
+int dx[8] = {-1, 0, 1, 0, 1, 1, -1, -1};
+int dy[8] = {0, 1, 0, -1, 1, -1, 1, -1};
+void DFS(int x, int y) {
+    isVisited[x][y] = true;
+    for(int i=0; i<8; i++) {
+        int n = x + dx[i];
+        int m = y + dy[i];
+        if(n >= 0 && n < w && m >= 0 && m < h) {
+            if(arr[n][m] && !isVisited[n][m]) {
+                DFS(n, m);
+            }
+        }
+    }
+    return;
+};
 
 // 1초, 128MB
 int main() {
     while(true) {
-        int w, h; // 1 ~ 50
         cin >> h >> w; // 열, 행
-        if(!h && !w) break;
-        bool arr[w][h];
-        bool isVis[w][h];
-        stack<pair<int, int>> stackDFS;
+        if(!h && !w) break; // 0 0 입력 시 정지.
         for(int i=0; i<w; i++) {
             for(int j=0; j<h; j++) {
                 cin >> arr[i][j];
-                isVis[i][j] = false;
+                isVisited[i][j] = false;
             }
         }
         int island = 0;
-        while(true) {
-            for(int i=0; i<w; i++) {
-                for(int j=0; j<h; j++) {
-                    if(arr[i][j] && !isVis[i][j]) {
-                        stackDFS.push(make_pair(i, j));
-                        isVis[i][j] = true;
-                        break;
-                    }
+        for(int i=0; i<w; i++) {
+            for(int j=0; j<h; j++) {
+                if(arr[i][j] && !isVisited[i][j]) {
+                    DFS(i, j);
+                    island++;
                 }
-                if(!stackDFS.empty()) break;
             }
-
-            if(stackDFS.empty()) break; // 섬 다 찾았으면 스탑.
-
-            while(!stackDFS.empty()) { // 주변 8칸에 대해 갈 수 있는 곳 찾는 DFS.
-                int x = stackDFS.top().first;
-                int y = stackDFS.top().second;
-                bool flag = false; // 2중 반복문을 빠져 나온 뒤 바로 while문을 continue하기 위한 플래그
-                for(int i=x-1; i<=x+1; i++) {
-                    for(int j=y-1; j<=y+1; j++) {
-                        if(i>=0 && i<w && j>=0 && j<h && !(i==x && j==y)) {
-                            if(arr[i][j] && !isVis[i][j]) {
-                                stackDFS.push(make_pair(i, j));
-                                isVis[i][j] = true;
-                                flag = true;
-                                break;
-                            }
-                        }
-                    }
-                    if(flag) break;
-                }
-                if(flag) continue;
-                stackDFS.pop();
-            }
-            island++;
         }
         cout << island << endl;
     }
