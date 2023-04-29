@@ -13,17 +13,33 @@ class j2805 {
         int N, M;
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
         int[] tree = new int[N];
         for(int i=0; i<N; i++) {
-            tree[i] = Integer.parseInt(st.nextToken());
+            tree[i] = Integer.parseInt(st.nextToken()); // 나무의 최대 높이는 10억
         }
         Arrays.sort(tree); // nlogn
-        for(int H = tree[N-1]; H >= 0; H--) {
-            int pos = Arrays.binarySearch(tree, H);
-            if(pos > 0) {
-                
+        int H = 0;
+        
+        
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        bw.write(String.valueOf(H) + '\n');
+        bw.flush(); 
+        bw.close();
+    }
+
+    public static int upperBound(int[] arr, int n) {
+        int start = 0;
+        int end = arr.length - 1;
+        while(start < end) {
+            int mid = (start + end) / 2;
+            if(arr[mid] <= n) {
+                start = mid + 1;
+            }
+            else {
+                end = mid;
             }
         }
-
+        return start;
     }
 }
