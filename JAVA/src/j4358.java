@@ -7,12 +7,9 @@ public class j4358 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st;
         TreeMap<String, Double> map = new TreeMap<>();
-        while(true) {
-            try {
-                st = new StringTokenizer(br.readLine(), "\n");
-            } catch(Exception e) {
-                break;
-            }
+        String temp;
+        while((temp = br.readLine()) != null) {
+            st = new StringTokenizer(temp, "\n");
             String key = st.nextToken();
             if(map.get(key) != null) {
                 map.put(key, map.get(key) + 1.0);
