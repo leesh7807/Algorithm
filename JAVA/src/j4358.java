@@ -5,18 +5,10 @@ public class j4358 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
         TreeMap<String, Double> map = new TreeMap<>();
-        String temp;
-        while((temp = br.readLine()) != null) {
-            st = new StringTokenizer(temp, "\n");
-            String key = st.nextToken();
-            if(map.get(key) != null) {
-                map.put(key, map.get(key) + 1.0);
-            }
-            else {
-                map.put(key, 1.0);
-            }
+        String tree;
+        while((tree = br.readLine()) != null) {
+            map.put(tree, map.getOrDefault(tree, 0.0) + 1.0);
         }
         double sum = 0;
         for(Double value : map.values()) {
