@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-public class j15649 {
+public class j15650 {
     static int n;
     static int m;
     static boolean[] visited;
@@ -28,7 +28,7 @@ public class j15649 {
             System.out.println(sb);
             return;
         }
-        for(int i=1; i<=n; i++) {
+        for(int i=v; i<=n; i++) {
             if(!visited[i]) {
                 backtracking(i);
                 stack.remove(stack.size() - 1);
@@ -38,7 +38,6 @@ public class j15649 {
     }
 }
 
-/* 백트래킹 문제. 순열.
- * 개념적으로는 DFS와 유사. 스택에 방문한 곳 기록해두면서 조건 만족할 떄 출력하도록.
- * 1 -> 2 -> 3 과 1 -> 3 -> 2 를 다르게 취급하는 문제이기에 방문한 곳을 어떻게 기록하고 관리할지에 대한 구현에 애를 먹었음.
+/* 15649 비튼 문제. 조합.
+ * 1 -> 3 -> 2를 허용하지 않는다. 그 다음 행선지를 결정할 때 내 현재 위치 이후만 하도록 반복문만 수정.
  */
