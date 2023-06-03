@@ -19,12 +19,11 @@ public class j7576 {
             }
         }
         int day = 0;
-        
         int[] dx = {1, -1, 0, 0};
         int[] dy = {0, 0, 1, -1};
         while(!tomato.isEmpty()) {
             day++;
-            LinkedList<Pair> nextDay = new LinkedList<>();
+            LinkedList<Pair> nextDay = new LinkedList<>(); // 하루 동안 익는 토마토를 계산하기 위해 다른 큐로 가져온다.
             while(!tomato.isEmpty()) {
                 nextDay.add(tomato.poll());                
             }
@@ -34,13 +33,13 @@ public class j7576 {
                     int newY = p.y+dy[i];
                     if(newX >= 0 && newX < row && newY >= 0 && newY < col && arr[newX][newY] == 0) { 
                         arr[newX][newY] = 1;
-                        tomato.add(new Pair(newX, newY));
+                        tomato.add(new Pair(newX, newY)); // 새롭게 익는 토마토를 집어 넣는다.
                     }
                 }
             }
         }
         if(isRiped(row, col, arr)) {
-            bw.write(Long.toString(day-1));
+            bw.write(Long.toString(day-1)); // 마지막으로 익은 토마토가 큐에 들어갔다 나오기 때문에 1을 빼준다.
         }
         else {
             bw.write("-1");
