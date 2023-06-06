@@ -47,7 +47,7 @@ public class j7576 {
         bw.close();
     }
 
-    public static boolean isRiped(int row, int col, int[][] arr) { // 다 익었으면 true 아님 flase
+    public static boolean isRiped(int row, int col, int[][] arr) { // 다 익었으면 true 아님 false
         for(int i=0; i<row; i++) {
             for(int j=0; j<col; j++) {
                 if(arr[i][j] == -1) {
