@@ -8,7 +8,7 @@ public class j1966 {
         int T = Integer.parseInt(st.nextToken());
         for(int t=0; t<T; t++) {
             st = new StringTokenizer(br.readLine());
-            int N = Integer.parseInt(st.nextToken());
+            st.nextToken();
             int M = Integer.parseInt(st.nextToken());
             st = new StringTokenizer(br.readLine());
             LinkedList<Pair> q = new LinkedList<>();
