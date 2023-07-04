@@ -7,52 +7,66 @@ public class j7662 {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int T = Integer.parseInt(st.nextToken());
         for(int t=0; t<T; t++) {
-            ArrayList<Integer> dpq = new ArrayList<>();
+            PriorityQueue<Integer> maxpq = new PriorityQueue<>((a, b) -> Integer.compare(b, a));
+            PriorityQueue<Integer> minpq = new PriorityQueue<>();
+            PriorityQueue<Integer> delMaxpq = new PriorityQueue<>((a, b) -> Integer.compare(b, a));
+            PriorityQueue<Integer> delMinpq = new PriorityQueue<>();
             int k = Integer.parseInt(br.readLine());
+            int size = 0;
             for(int i=0; i<k; i++) {
                 st = new StringTokenizer(br.readLine());
                 String q = st.nextToken();
                 int v = Integer.parseInt(st.nextToken());
                 switch(q) {
                     case "I" :
-                        if(dpq.isEmpty()) {
-                            dpq.add(v);
-                        }
-                        else {
-                            int first = 0;
-                            int last = dpq.size();
-                            while(first < last) {
-                                int mid = (first + last) / 2;
-                                if(dpq.get(mid) < v) {
-                                    first = mid + 1;
-                                }
-                                else {
-                                    last = mid;
-                                }
-                            }
-                            dpq.add(first, v);
-                        }
-                        break;
+                        maxpq.add(v);
+                        minpq.add(v);
+                        size++;
+                        break;                        
                     case "D" :
-                        if(dpq.isEmpty()) break;
+                        if(size == 0) break;
                         else {
                             if(v == 1) {
-                                dpq.remove(dpq.size()-1);
+                                int del = maxpq.poll();
+                                while(!delMaxpq.isEmpty() && delMaxpq.peek() == del) {
+                                    delMaxpq.poll();
+                                    del = maxpq.poll();
+                                }
+                                delMinpq.add(del);
+                                size--;
                             }
                             else {
-                                dpq.remove(0);
+                                int del = minpq.poll();
+                                while(!delMinpq.isEmpty() && delMinpq.peek() == del) {
+                                    delMinpq.poll();
+                                    del = minpq.poll();
+                                }
+                                delMaxpq.add(del);
+                                size--;
                             }
                         }
                         break;
                 }
             }
-            if(dpq.isEmpty()) {
+            if(size == 0) {
                 bw.write("EMPTY\n");
             }
             else {
-                bw.write(Long.toString(dpq.get(dpq.size()-1)) + " " + Long.toString(dpq.get(0)));
+                while(!delMaxpq.isEmpty()) {
+                    if(delMaxpq.poll() == maxpq.peek()) maxpq.poll();
+                }
+                while(!delMinpq.isEmpty()) {
+                    if(delMinpq.poll() == minpq.peek()) minpq.poll();
+                }
+                bw.write(Long.toString(maxpq.peek()) + " " + Long.toString(minpq.peek()) + "\n");
+
             }
         }
         bw.close();
     }
 }
+
+/* ArrayList로 구현하고, 삽입하는 위치를 이분탐색으로 찾는 방법을 최초 구현. => 시간 초과
+ * ArrayList가 삽입, 삭제할 때 복사해서 옮기는 방식을 사용해서 느리다. 
+ * LinkedList는 단순 삽입, 삭제는 빠른데 index 탐색이 O(n)이여서 특정 위치 삽입, 삭제는 느리다.
+ */
