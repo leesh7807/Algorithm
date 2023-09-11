@@ -35,11 +35,9 @@ public class j1005 {
         ArrayList<ArrayList<Integer>> graph;
         int[] delay;
         Integer[] caching;
-        boolean[] isVisited;
         public ACMCraft(ArrayList<ArrayList<Integer>> graph, int[] delay) {
             this.graph = graph;
             this.delay = delay;
-            isVisited = new boolean[delay.length];
             caching = new Integer[delay.length];
         }
         public int getConstructionTime(int start) {
@@ -48,7 +46,6 @@ public class j1005 {
         private int retrieveNode(int node) {
             PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> {return Integer.compare(b, a);});
             for(Integer i : graph.get(node)) {
-                isVisited[i] = true;
                 if(caching[i] != null) {
                     maxHeap.add(caching[i]);
                 }
@@ -57,7 +54,6 @@ public class j1005 {
                     maxHeap.add(temp);
                     caching[i] = temp;
                 }
-                isVisited[i] = false;
             }
             if(maxHeap.isEmpty()) {
                 return delay[node];
