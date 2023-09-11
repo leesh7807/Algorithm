@@ -52,7 +52,7 @@ public class j16236 {
                 while(!queue.isEmpty()) {
                     now.add(queue.poll());
                 }
-                PriorityQueue<Pair> retQueue = new PriorityQueue<>((Pair a, Pair b) -> {
+                PriorityQueue<Pair> retQueue = new PriorityQueue<>((a, b) -> {
                     if(a.row == b.row) return Integer.compare(a.col, b.col);
                     else return Integer.compare(a.row, b.row);
                 });
