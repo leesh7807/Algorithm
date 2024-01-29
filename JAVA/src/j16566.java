@@ -6,8 +6,8 @@ class j16566 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N, M, K;
-        N = Integer.parseInt(st.nextToken());
+        int M, K;
+        st.nextToken();
         M = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
         arr = new ArrayList<>(M);
